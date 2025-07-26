@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
-import { Icon, DivIcon } from 'leaflet';
+import { DivIcon } from 'leaflet';
 import { MapPin } from '../types';
 import { UFPE_CENTER } from '../data/mockData';
-import { PIN_CATEGORIES } from '../data/categories';
 import * as LucideIcons from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
+import ReactDOMServer from 'react-dom/server'; // no topo do arquivo
 
 interface MapComponentProps {
   pins: MapPin[];
@@ -14,24 +14,24 @@ interface MapComponentProps {
   addingPin?: boolean;
 }
 
-const MapComponent: React.FC<MapComponentProps> = ({ 
-  pins, 
-  onPinClick, 
-  onMapClick, 
-  addingPin 
+const MapComponent: React.FC<MapComponentProps> = ({
+  pins,
+  onPinClick,
+  onMapClick,
+  addingPin
 }) => {
   const [selectedPin, setSelectedPin] = useState<MapPin | null>(null);
 
   // Component to handle map clicks
   const MapClickHandler = () => {
     const map = useMap();
-    
+
     useEffect(() => {
       if (addingPin && onMapClick) {
         const handleClick = (e: any) => {
           onMapClick(e.latlng.lat, e.latlng.lng);
         };
-        
+
         map.on('click', handleClick);
         return () => {
           map.off('click', handleClick);
@@ -45,25 +45,27 @@ const MapComponent: React.FC<MapComponentProps> = ({
   // Create custom marker icons
   const createCustomIcon = (category: any) => {
     const IconComponent = (LucideIcons as any)[category.icon] || LucideIcons.MapPin;
-    
+
+    const svgString = ReactDOMServer.renderToStaticMarkup(
+      <IconComponent size={18} color="white" strokeWidth={2} />
+    );
+
     return new DivIcon({
       html: `
-        <div style="
-          background-color: ${category.color};
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border: 3px solid white;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        ">
-          <svg width="18" height="18" fill="white" stroke="white" stroke-width="2">
-            ${IconComponent ? `<use href="#${category.icon}"/>` : ''}
-          </svg>
-        </div>
-      `,
+      <div style="
+        background-color: ${category.color};
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 3px solid white;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      ">
+        ${svgString}
+      </div>
+    `,
       className: 'custom-div-icon',
       iconSize: [32, 32],
       iconAnchor: [16, 16],
@@ -80,12 +82,11 @@ const MapComponent: React.FC<MapComponentProps> = ({
         zoomControl={false}
       >
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
-        
         <MapClickHandler />
-        
+
         {pins.map((pin) => (
           <Marker
             key={pin.id}
@@ -101,7 +102,7 @@ const MapComponent: React.FC<MapComponentProps> = ({
             <Popup>
               <div className="p-3 min-w-[200px]">
                 <div className="flex items-center gap-2 mb-2">
-                  <div 
+                  <div
                     className="w-6 h-6 rounded-full flex items-center justify-center"
                     style={{ backgroundColor: pin.category.color }}
                   >
@@ -112,11 +113,11 @@ const MapComponent: React.FC<MapComponentProps> = ({
                       )}
                     </span>
                   </div>
-                  <span 
+                  <span
                     className="text-xs px-2 py-1 rounded-full font-body"
-                    style={{ 
+                    style={{
                       backgroundColor: pin.category.bgColor,
-                      color: pin.category.color 
+                      color: pin.category.color
                     }}
                   >
                     {pin.category.name}
@@ -138,7 +139,7 @@ const MapComponent: React.FC<MapComponentProps> = ({
           </Marker>
         ))}
       </MapContainer>
-      
+
       {addingPin && (
         <div className="absolute top-4 left-4 right-4 z-1000 bg-primary-600 text-white p-3 rounded-lg shadow-lg">
           <p className="text-sm font-body">📍 Toque no mapa para adicionar um novo pin</p>

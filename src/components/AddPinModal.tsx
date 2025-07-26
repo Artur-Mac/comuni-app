@@ -29,7 +29,7 @@ const AddPinModal: React.FC<AddPinModalProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!title || !description || !selectedCategory || !selectedLocation) {
       return;
     }
@@ -52,8 +52,9 @@ const AddPinModal: React.FC<AddPinModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-end">
-      <div className="bg-warm-50 rounded-t-2xl w-full max-h-[80vh] overflow-y-auto">
+    <div className="fixed inset-0 z-[9999] bg-black bg-opacity-50 flex items-end md:items-center justify-center p-4">
+      <div className="bg-warm-50 rounded-t-2xl md:rounded-2xl w-full md:max-w-md max-h-[90vh] overflow-y-auto shadow-xl">
+        {/* Header */}
         <div className="p-4 border-b border-primary-200">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-heading text-primary-900 tracking-wide">ADICIONAR PIN</h2>
@@ -66,6 +67,7 @@ const AddPinModal: React.FC<AddPinModalProps> = ({
           </div>
         </div>
 
+        {/* Form */}
         <form onSubmit={handleSubmit} className="p-4">
           <div className="space-y-4">
             {/* Title */}
@@ -103,7 +105,7 @@ const AddPinModal: React.FC<AddPinModalProps> = ({
               <label className="block text-sm font-body font-medium text-primary-700 mb-2">
                 Categoria *
               </label>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {PIN_CATEGORIES.map((category) => {
                   const IconComponent = (LucideIcons as any)[category.icon] || LucideIcons.MapPin;
                   const isSelected = selectedCategory?.id === category.id;
@@ -137,7 +139,9 @@ const AddPinModal: React.FC<AddPinModalProps> = ({
             {/* Location Info */}
             {selectedLocation && (
               <div className="bg-primary-50 p-3 rounded-lg">
-                <h4 className="text-sm font-body font-medium text-primary-700 mb-1">Local Selecionado:</h4>
+                <h4 className="text-sm font-body font-medium text-primary-700 mb-1">
+                  Local Selecionado:
+                </h4>
                 <p className="text-xs font-body text-primary-600">
                   Lat: {selectedLocation.lat.toFixed(6)}, Lng: {selectedLocation.lng.toFixed(6)}
                 </p>
@@ -145,6 +149,7 @@ const AddPinModal: React.FC<AddPinModalProps> = ({
             )}
           </div>
 
+          {/* Buttons */}
           <div className="mt-6 flex gap-3">
             <button
               type="button"

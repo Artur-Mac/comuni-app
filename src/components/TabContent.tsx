@@ -4,9 +4,10 @@ import { Calendar, Heart, HelpCircle, MapPin } from 'lucide-react';
 
 interface TabContentProps {
   activeTab: TabType;
+  onRequestHelp?: () => void; // nova prop opcional
 }
 
-const TabContent: React.FC<TabContentProps> = ({ activeTab }) => {
+const TabContent: React.FC<TabContentProps> = ({ activeTab, onRequestHelp }) => {
   if (activeTab === 'map') return null;
 
   const renderContent = () => {
@@ -20,7 +21,10 @@ const TabContent: React.FC<TabContentProps> = ({ activeTab }) => {
               Solicite ou ofereça ajuda para a comunidade acadêmica
             </p>
             <div className="space-y-3">
-              <button className="w-full py-3 px-4 bg-primary-600 text-white rounded-lg font-body font-medium hover:bg-primary-700 transition-colors">
+              <button
+                className="w-full py-3 px-4 bg-primary-600 text-white rounded-lg font-body font-medium hover:bg-primary-700 transition-colors"
+                onClick={onRequestHelp}
+              >
                 Solicitar Ajuda
               </button>
               <button className="w-full py-3 px-4 bg-warm-600 text-white rounded-lg font-body font-medium hover:bg-warm-700 transition-colors">

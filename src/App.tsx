@@ -26,7 +26,7 @@ function App() {
 
   // Filter pins based on search and categories
   useEffect(() => {
-    let filtered = pins.filter(pin => 
+    let filtered = pins.filter(pin =>
       selectedCategories.includes(pin.category.id)
     );
 
@@ -50,6 +50,19 @@ function App() {
         return [...prev, categoryId];
       }
     });
+  };
+
+  const handleRequestHelpPin = () => {
+    const helpCategory = PIN_CATEGORIES.find(c => c.id === 'help' || c.id === 'ajuda' || c.name.toLowerCase().includes('ajuda'));
+
+    setActiveTab('map');
+    setAddingPin(true);
+    setSelectedLocation(null);
+    if (helpCategory) {
+      setTimeout(() => {
+        setShowAddPinModal(true);
+      }, 100); // Garante que o mapa tenha tempo de renderizar
+    }
   };
 
   const handleAddPin = () => {
@@ -107,7 +120,7 @@ function App() {
             addingPin={addingPin}
           />
         ) : (
-          <TabContent activeTab={activeTab} />
+          <TabContent activeTab={activeTab} onRequestHelp={handleRequestHelpPin} />
         )}
       </div>
 
