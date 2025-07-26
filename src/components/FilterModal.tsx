@@ -21,15 +21,15 @@ const FilterModal: React.FC<FilterModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-end">
-      <div className="bg-white rounded-t-2xl w-full max-h-[70vh] overflow-y-auto">
-        <div className="p-4 border-b border-gray-200">
+      <div className="bg-warm-50 rounded-t-2xl w-full max-h-[70vh] overflow-y-auto">
+        <div className="p-4 border-b border-primary-200">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-gray-900">Filtrar Categorias</h2>
+            <h2 className="text-xl font-heading text-primary-900 tracking-wide">FILTRAR CATEGORIAS</h2>
             <button
               onClick={onClose}
-              className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+              className="p-2 rounded-lg hover:bg-primary-100 transition-colors"
             >
-              <X size={20} className="text-gray-600" />
+              <X size={20} className="text-primary-600" />
             </button>
           </div>
         </div>
@@ -46,8 +46,8 @@ const FilterModal: React.FC<FilterModalProps> = ({
                   onClick={() => onToggleCategory(category.id)}
                   className={`w-full flex items-center gap-3 p-3 rounded-lg border-2 transition-all ${
                     isSelected
-                      ? 'border-blue-500 bg-blue-50'
-                      : 'border-gray-200 bg-white hover:bg-gray-50'
+                      ? 'border-primary-500 bg-primary-50'
+                      : 'border-primary-200 bg-white hover:bg-primary-50'
                   }`}
                 >
                   <div
@@ -58,11 +58,11 @@ const FilterModal: React.FC<FilterModalProps> = ({
                   </div>
                   
                   <div className="flex-1 text-left">
-                    <h3 className="font-medium text-gray-900">{category.name}</h3>
+                    <h3 className="font-body font-medium text-primary-900">{category.name}</h3>
                   </div>
 
                   <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                    isSelected ? 'border-blue-500 bg-blue-500' : 'border-gray-300'
+                    isSelected ? 'border-primary-500 bg-primary-500' : 'border-primary-300'
                   }`}>
                     {isSelected && (
                       <div className="w-2 h-2 bg-white rounded-full"></div>
@@ -78,13 +78,13 @@ const FilterModal: React.FC<FilterModalProps> = ({
               onClick={() => {
                 PIN_CATEGORIES.forEach(cat => onToggleCategory(cat.id));
               }}
-              className="flex-1 py-3 px-4 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+              className="flex-1 py-3 px-4 bg-primary-100 text-primary-700 rounded-lg font-body font-medium hover:bg-primary-200 transition-colors"
             >
               Selecionar Todos
             </button>
             <button
               onClick={onClose}
-              className="flex-1 py-3 px-4 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
+              className="flex-1 py-3 px-4 bg-primary-600 text-white rounded-lg font-body font-medium hover:bg-primary-700 transition-colors"
             >
               Aplicar Filtros
             </button>

@@ -1,3 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom Leaflet Styling */
+.leaflet-container {
+  font-family: 'Lato', sans-serif;
+  background: #fef7f0;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(220, 38, 38, 0.15);
+  border: 1px solid rgba(220, 38, 38, 0.1);
+}
+
+.leaflet-popup-tip {
+  background: #ffffff;
+  border: 1px solid rgba(220, 38, 38, 0.1);
+}
+
+.leaflet-popup-content {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+}
+
+.leaflet-control-zoom a {
+  background: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+  transition: all 0.2s ease;
+}
+
+.leaflet-control-zoom a:hover {
+  background: #b91c1c;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(220, 38, 38, 0.4);
+}
+
+.leaflet-control-attribution {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  font-family: 'Lato', sans-serif;
+  font-size: 11px;
+}
+
+/* Custom marker animations */
+.custom-div-icon {
+  animation: markerBounce 0.6s ease-out;
+}
+
+@keyframes markerBounce {
+  0% {
+    transform: translateY(-20px) scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-5px) scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}

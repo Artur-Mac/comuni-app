@@ -99,7 +99,7 @@ const MapComponent: React.FC<MapComponentProps> = ({
             }}
           >
             <Popup>
-              <div className="p-2 min-w-[200px]">
+              <div className="p-3 min-w-[200px]">
                 <div className="flex items-center gap-2 mb-2">
                   <div 
                     className="w-6 h-6 rounded-full flex items-center justify-center"
@@ -113,7 +113,7 @@ const MapComponent: React.FC<MapComponentProps> = ({
                     </span>
                   </div>
                   <span 
-                    className="text-xs px-2 py-1 rounded-full"
+                    className="text-xs px-2 py-1 rounded-full font-body"
                     style={{ 
                       backgroundColor: pin.category.bgColor,
                       color: pin.category.color 
@@ -122,15 +122,15 @@ const MapComponent: React.FC<MapComponentProps> = ({
                     {pin.category.name}
                   </span>
                 </div>
-                <h3 className="font-semibold text-gray-900 mb-1">{pin.title}</h3>
-                <p className="text-sm text-gray-600 mb-2">{pin.description}</p>
+                <h3 className="font-heading text-lg text-primary-900 mb-1 tracking-wide">{pin.title.toUpperCase()}</h3>
+                <p className="text-sm font-body text-primary-600 mb-3">{pin.description}</p>
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-gray-500">
+                  <span className="text-xs font-body text-primary-500">
                     {pin.timestamp.toLocaleDateString('pt-BR')}
                   </span>
                   <div className="flex items-center gap-1">
-                    <span className="text-sm font-medium text-blue-600">{pin.upvotes}</span>
-                    <span className="text-xs text-gray-500">curtidas</span>
+                    <span className="text-sm font-body font-medium text-primary-600">{pin.upvotes}</span>
+                    <span className="text-xs font-body text-primary-500">curtidas</span>
                   </div>
                 </div>
               </div>
@@ -140,8 +140,8 @@ const MapComponent: React.FC<MapComponentProps> = ({
       </MapContainer>
       
       {addingPin && (
-        <div className="absolute top-4 left-4 right-4 z-1000 bg-blue-600 text-white p-3 rounded-lg shadow-lg">
-          <p className="text-sm">📍 Toque no mapa para adicionar um novo pin</p>
+        <div className="absolute top-4 left-4 right-4 z-1000 bg-primary-600 text-white p-3 rounded-lg shadow-lg">
+          <p className="text-sm font-body">📍 Toque no mapa para adicionar um novo pin</p>
         </div>
       )}
     </div>

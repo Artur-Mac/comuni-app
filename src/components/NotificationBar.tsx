@@ -23,17 +23,17 @@ const NotificationBar: React.FC<NotificationBarProps> = ({ notification, onDismi
   const getBgColor = () => {
     switch (notification.type) {
       case 'alert':
-        return 'bg-red-500';
+        return 'bg-primary-600';
       case 'warning':
-        return 'bg-orange-500';
+        return 'bg-warm-500';
       case 'info':
       default:
-        return 'bg-blue-500';
+        return 'bg-primary-500';
     }
   };
 
   return (
-    <div className={`${getBgColor()} text-white px-4 py-3 flex items-center gap-3`}>
+    <div className={`${getBgColor()} text-white px-4 py-3 flex items-center gap-3 font-body`}>
       <div className="flex-shrink-0">
         {getIcon()}
       </div>

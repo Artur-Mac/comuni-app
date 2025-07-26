@@ -26,14 +26,14 @@ const BottomNavigation: React.FC<BottomNavigationProps> = ({
       <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 z-10">
         <button
           onClick={onAddPin}
-          className="w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg flex items-center justify-center transition-colors"
+          className="w-14 h-14 bg-primary-600 hover:bg-primary-700 text-white rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-105"
         >
           <Plus size={24} />
         </button>
       </div>
 
       {/* Navigation Bar */}
-      <div className="bg-white border-t border-gray-200 px-4 py-2">
+      <div className="bg-white border-t border-primary-200 px-4 py-2">
         <div className="flex justify-around">
           {tabs.map((tab) => {
             const isActive = activeTab === tab.id;
@@ -44,11 +44,11 @@ const BottomNavigation: React.FC<BottomNavigationProps> = ({
                 key={tab.id}
                 onClick={() => onTabChange(tab.id)}
                 className={`flex flex-col items-center py-2 px-3 transition-colors ${
-                  isActive ? 'text-blue-600' : 'text-gray-500 hover:text-gray-700'
+                  isActive ? 'text-primary-600' : 'text-primary-400 hover:text-primary-600'
                 }`}
               >
                 <IconComponent size={20} />
-                <span className="text-xs mt-1 font-medium">{tab.label}</span>
+                <span className="text-xs mt-1 font-body font-medium">{tab.label}</span>
               </button>
             );
           })}
